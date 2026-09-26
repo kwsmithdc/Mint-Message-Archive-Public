@@ -1,0 +1,26 @@
+name: Linux Server Check
+
+on:
+  push:
+    paths:
+      - 'linux-server/**'
+      - 'run-tests.sh'
+      - 'README.md'
+      - 'CHANGELOG.md'
+      - '.github/workflows/linux-server-check.yml'
+  pull_request:
+    paths:
+      - 'linux-server/**'
+      - 'run-tests.sh'
+      - '.github/workflows/linux-server-check.yml'
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Run regression suite
+        run: |
+          chmod +x run-tests.sh
+          ./run-tests.sh

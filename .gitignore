@@ -1,0 +1,36 @@
+# Android / Gradle
+.gradle/
+**/.gradle/
+build/
+**/build/
+
+# Android Studio / IntelliJ
+.idea/
+**/.idea/
+*.iml
+
+# Local Android SDK configuration
+local.properties
+**/local.properties
+
+# Secrets / credentials
+.env
+.env.*
+*.key
+*.pem
+*.p12
+*.jks
+*.keystore
+credentials/
+secrets/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# OS/editor files
+.DS_Store
+Thumbs.db
+*~

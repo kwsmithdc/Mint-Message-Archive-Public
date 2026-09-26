@@ -1,0 +1,11 @@
+[Unit]
+Description=Weekly Mint Message Archive health verification
+
+[Timer]
+OnCalendar=Sun *-*-* 03:00:00
+Persistent=true
+RandomizedDelaySec=15m
+Unit=mint-message-archive-health.service
+
+[Install]
+WantedBy=timers.target

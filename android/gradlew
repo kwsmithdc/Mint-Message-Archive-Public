@@ -1,0 +1,43 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+GRADLE_VERSION="8.13"
+GRADLE_ROOT="${GRADLE_USER_HOME:-$HOME/.gradle}/mint-message-archive/gradle-${GRADLE_VERSION}"
+GRADLE_BIN="${GRADLE_ROOT}/bin/gradle"
+DIST_URL="https://services.gradle.org/distributions/gradle-${GRADLE_VERSION}-bin.zip"
+TMP_DIR="${GRADLE_ROOT}.download"
+
+if [[ ! -x "$GRADLE_BIN" ]]; then
+    mkdir -p "$GRADLE_ROOT"
+    rm -rf "$TMP_DIR"
+    mkdir -p "$TMP_DIR"
+
+    archive="$TMP_DIR/gradle-${GRADLE_VERSION}-bin.zip"
+    echo "Downloading Gradle ${GRADLE_VERSION}..."
+    if command -v curl >/dev/null 2>&1; then
+        curl -fL --retry 3 --output "$archive" "$DIST_URL"
+    elif command -v wget >/dev/null 2>&1; then
+        wget -O "$archive" "$DIST_URL"
+    else
+        echo "Error: curl or wget is required to bootstrap Gradle." >&2
+        exit 1
+    fi
+
+    if ! command -v unzip >/dev/null 2>&1; then
+        echo "Error: unzip is required to bootstrap Gradle." >&2
+        exit 1
+    fi
+
+    unzip -q "$archive" -d "$TMP_DIR"
+    extracted="$TMP_DIR/gradle-${GRADLE_VERSION}"
+    if [[ ! -x "$extracted/bin/gradle" ]]; then
+        echo "Error: Gradle archive did not contain the expected distribution." >&2
+        exit 1
+    fi
+
+    rm -rf "$GRADLE_ROOT"
+    mv "$extracted" "$GRADLE_ROOT"
+    rm -rf "$TMP_DIR"
+fi
+
+exec "$GRADLE_BIN" "$@"
