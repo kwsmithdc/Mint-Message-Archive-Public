@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-ExecStart=/usr/bin/python3 %h/mint-message-archive/linux-server/server.py --bind 0.0.0.0 --port 8765 --archive "%h/mint-message-archive-archive" --token-file "%h/.config/mint-message-archive/server.token"
+ExecStart=/usr/bin/python3.12 %h/mint-message-archive/linux-server/server.py --bind 0.0.0.0 --port 8765 --archive "%h/mint-message-archive-archive" --token-file "%h/.config/mint-message-archive/server.token"
 Restart=on-failure
 RestartSec=5
 
