@@ -4,4 +4,4 @@ Description=Mint Message Archive health verification
 [Service]
 Type=oneshot
 WorkingDirectory=%h/mint-message-archive/linux-server
-ExecStart=/usr/bin/python3 %h/mint-message-archive/linux-server/health_report.py --archive "%h/mint-message-archive-archive"
+ExecStart=/usr/bin/python3.12 %h/mint-message-archive/linux-server/health_report.py --archive "%h/mint-message-archive-archive"
