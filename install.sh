@@ -16,7 +16,7 @@ fail() { printf '\nERROR: %s\n' "$*" >&2; exit 1; }
 install_packages=()
 command -v git >/dev/null 2>&1 || install_packages+=(git)
 command -v curl >/dev/null 2>&1 || install_packages+=(curl)
-command -v python3 >/dev/null 2>&1 || install_packages+=(python3.12)
+command -v python3.12 >/dev/null 2>&1 || install_packages+=(python3.12)
 command -v ip >/dev/null 2>&1 || install_packages+=(iproute2)
 
 if (( ${#install_packages[@]} > 0 )); then
@@ -27,9 +27,9 @@ if (( ${#install_packages[@]} > 0 )); then
 fi
 
 command -v git >/dev/null 2>&1 || fail "Git is required."
-command -v python3 >/dev/null 2>&1 || fail "Python 3 is required."
+command -v python3.12 >/dev/null 2>&1 || fail "Python 3.12 is required."
 
-python3 - <<'PY'
+python3.12 - <<'PY'
 import sys
 if sys.version_info[:2] != (3, 12):
     raise SystemExit(
@@ -54,7 +54,7 @@ chmod 700 "$CONFIG_DIR"
 if [[ ! -s "$TOKEN_FILE" ]]; then
     log "Generating a new local authentication token"
     umask 077
-    python3 -c 'import secrets; print(secrets.token_urlsafe(32))' > "$TOKEN_FILE"
+    python3.12 -c 'import secrets; print(secrets.token_urlsafe(32))' > "$TOKEN_FILE"
 fi
 chmod 600 "$TOKEN_FILE"
 
