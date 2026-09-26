@@ -32,6 +32,14 @@ The script runs the Android unit tests, builds the debug APK, verifies that exac
 
 Detailed Android installation instructions are in [ANDROID-INSTALL.md](ANDROID-INSTALL.md).
 
+### Prebuilt Android APK
+
+Tagged public releases include a downloadable debug APK built by GitHub Actions. This is the easiest option for users who do not want to set up Android Studio or build the Android project themselves.
+
+Open the repository's **Releases** page and download the APK from the release assets. Android may require enabling installation from the application used to open the APK.
+
+The ADB installer remains available when you want the source tree built and installed automatically.
+
 ### Manual Android build
 
 ```bash
